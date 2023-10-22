@@ -66,4 +66,55 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
+  cookies: {
+    // sessionToken: {
+    //   name: `next-auth.session-token`,
+    //   options: {
+    //     httpOnly: true,
+    //     sameSite: "strict",
+    //     path: "/",
+    //   },
+    // },
+    // callbackUrl: {
+    //   name: `next-auth.callback-url`,
+    //   options: {
+    //     sameSite: "strict",
+    //     path: "/",
+    //   },
+    // },
+    // csrfToken: {
+    //   name: `next-auth.csrf-token`,
+    //   options: {
+    //     httpOnly: true,
+    //     sameSite: "strict",
+    //     path: "/",
+    //   },
+    // },
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "strict",
+        path: "/",
+        secure: true,
+      },
+    },
+    callbackUrl: {
+      name: `__Secure-next-auth.callback-url`,
+      options: {
+        sameSite: "strict",
+        path: "/",
+        secure: true,
+      },
+    },
+    csrfToken: {
+      name: `__Host-next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "strict",
+        path: "/",
+        secure: true,
+      },
+    },
+  },
 };
