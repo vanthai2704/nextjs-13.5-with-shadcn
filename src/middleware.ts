@@ -15,9 +15,9 @@ export default withAuth(
 
     const cookies = req.cookies;
 
-    console.log("cookies ====== ", cookies.get("next-auth.csrf-token"));
+    console.log("cookies ====== ", cookies.get("__Host-next-auth.csrf-token"));
 
-    if (!cookies.get("next-auth.csrf-token")) {
+    if (!cookies.get("__Host-next-auth.csrf-token")) {
       return NextResponse.redirect(new URL("/error", req.url));
     }
 
