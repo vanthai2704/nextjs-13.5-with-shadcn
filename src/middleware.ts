@@ -6,14 +6,20 @@ export default withAuth(
   async function middleware(req) {
     const token = await getToken({ req });
 
-    console.log("req", req);
-
     console.log("token", token);
 
     const isAuth = !!token;
     const isAuthPage =
       req.nextUrl.pathname.startsWith("/login") ||
       req.nextUrl.pathname.startsWith("/register");
+
+    const cookies = req.cookies;
+
+    console.log("cookies ====== ", cookies);
+
+    if (!cookies) {
+      return NextResponse.redirect(new URL("/error", req.url));
+    }
 
     if (isAuthPage) {
       if (isAuth) {
