@@ -1,9 +1,9 @@
-import { Icons } from "@/components/Icons";
 import { UserAuthForm } from "@/components/user-auth-form";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import { Icons } from "@/components/icons";
 
 const SignIn = () => {
   return (

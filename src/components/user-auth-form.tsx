@@ -58,7 +58,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     toast({
       title: "Login Success",
     });
-    router.push(signInResult?.url);
+
+    if (signInResult?.url) {
+      router.push(signInResult.url);
+    }
   }
 
   return (
