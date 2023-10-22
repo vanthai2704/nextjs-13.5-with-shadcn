@@ -40,7 +40,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       username: data.username.toLowerCase(),
       password: data.password.toLowerCase(),
       redirect: false,
-      callbackUrl: searchParams?.get("from") || "/",
+      callbackUrl: searchParams?.get("callbackUrl") || "/",
     });
 
     console.log("signInResult ===> ", signInResult, searchParams?.get("from"));
@@ -58,7 +58,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     toast({
       title: "Login Success",
     });
-    router.push(searchParams?.get("from") || "/");
+    router.push(signInResult?.url);
   }
 
   return (

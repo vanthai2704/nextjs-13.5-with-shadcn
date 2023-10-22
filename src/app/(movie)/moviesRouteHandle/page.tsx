@@ -1,6 +1,10 @@
+"use client";
+
 import { revalidateTag } from "next/cache";
 import Image from "next/image";
-import SearchBar from "./search";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import useSWR from "swr";
 
 type Movie = {
   title: string;
@@ -10,40 +14,44 @@ type Movie = {
   thumbnail_height: number;
 };
 
-const getMovies = async (search?: string) => {
-  const jsonData = await fetch(
-    "https://65193f6b818c4e98ac6030e4.mockapi.io/movies",
-    {
-      next: {
-        tags: ["products"],
-      },
-    }
-  );
+const Movies = () => {
+  const [movies, setMovies] = useState<Movie[]>();
 
-  const data: Movie[] = await jsonData.json();
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data?.data);
 
-  if (search) {
-    return data.filter((item) =>
-      item?.title?.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+  const { data, error } = useSWR("/api/movies", fetcher);
+
+  console.log(data);
+
+  const getMovies = async (search?: string) => {
+    const jsonData = await fetch(
+      "https://65193f6b818c4e98ac6030e4.mockapi.io/movies",
+      {
+        next: {
+          tags: ["products"],
+        },
+      }
     );
-  }
 
-  return data;
-};
+    const data: Movie[] = await jsonData.json();
+    let result = [];
 
-const Movies = async ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
-  const search =
-    typeof searchParams.search === "string" ? searchParams?.search : undefined;
+    if (search) {
+      result = data.filter((item) =>
+        item?.title?.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      );
+    }
 
-  const data = await getMovies(search);
+    setMovies(data);
+  };
+
+  useEffect(() => {
+    // getMovies();
+  }, []);
 
   return (
     <div className="min-h-screen w-[800px] m-auto mt-10">
-      <SearchBar />
+      {/* <SearchBar /> */}
       <div className="grid grid-cols-4 gap-8 mt-10">
         {data?.map((data: any, index: any) => {
           return (

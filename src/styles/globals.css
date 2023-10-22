@@ -23,29 +23,29 @@
   }
 
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --background: 240 80% 98%; /* Màu nền - Màu xám nhạt và rất sáng */
+    --foreground: 0 0% 20%; /* Màu chữ nền - Màu đen */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 240 20% 96%; /* Màu nhạt - Màu xám nhạt và sáng */
+    --muted-foreground: 0 0% 40%; /* Màu chữ nền cho màu nhạt - Màu đen */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --primary: 210 40% 50%; /* Màu chính - Màu xanh lam nhạt */
+    --primary-foreground: 0 0% 100%; /* Màu chữ nền cho màu chính - Màu trắng */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --secondary: 30 100% 60%; /* Màu phụ - Màu cam sáng */
+    --secondary-foreground: 0 0% 20%; /* Màu chữ nền cho màu phụ - Màu đen */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 45 100% 60%; /* Màu điểm nhấn - Màu vàng sáng */
+    --accent-foreground: 0 0% 10%; /* Màu chữ nền cho màu điểm nhấn - Màu đen */
+
+    --destructive: 0 100% 50%; /* Màu hủy bỏ - Màu đỏ sáng */
+    --destructive-foreground: 210 40% 98%; /* Màu chữ nền cho màu hủy bỏ - Màu xanh lam nhạt */
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;

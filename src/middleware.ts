@@ -6,6 +6,10 @@ export default withAuth(
   async function middleware(req) {
     const token = await getToken({ req });
 
+    console.log("req", req);
+
+    console.log("token", token);
+
     const isAuth = !!token;
     const isAuthPage =
       req.nextUrl.pathname.startsWith("/login") ||
@@ -19,8 +23,6 @@ export default withAuth(
       return null;
     }
 
-    console.log("req.nextUrl", req.nextUrl);
-
     if (!isAuth) {
       let from = req.nextUrl.pathname;
       if (req.nextUrl.search) {
@@ -28,7 +30,7 @@ export default withAuth(
       }
 
       return NextResponse.redirect(
-        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+        new URL(`/login?callbackUrl=${encodeURIComponent(from)}`, req.url)
       );
     }
   },

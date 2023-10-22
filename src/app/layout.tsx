@@ -2,10 +2,10 @@ import Header from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
 import SessionProvider from "@/hocs/session-provider";
 import { authOptions } from "@/lib/auth";
-import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Inter } from "next/font/google";
+import "@/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +19,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  console.log("rootlayout");
-
   return (
     <html lang="en">
       <body className={"m-10"}>
