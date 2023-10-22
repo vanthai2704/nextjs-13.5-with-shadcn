@@ -66,4 +66,29 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "strict",
+        path: "/",
+      },
+    },
+    callbackUrl: {
+      name: `next-auth.callback-url`,
+      options: {
+        sameSite: "strict",
+        path: "/",
+      },
+    },
+    csrfToken: {
+      name: `next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "strict",
+        path: "/",
+      },
+    },
+  },
 };
