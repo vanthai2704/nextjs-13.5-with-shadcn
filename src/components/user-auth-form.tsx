@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
 import { Icons } from "./icons";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -37,19 +38,19 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     setIsLoading(true);
 
     const signInResult = await signIn("credentials", {
-      username: data.username.toLowerCase(),
-      password: data.password.toLowerCase(),
+      username: data.username,
+      password: data.password,
       redirect: false,
       callbackUrl: searchParams?.get("callbackUrl") || "/",
     });
 
-    console.log("signInResult ===> ", signInResult, searchParams?.get("from"));
-
     setIsLoading(false);
 
-    if (!signInResult?.ok) {
+    console.log("signInResult", signInResult);
+
+    if (!signInResult?.ok || signInResult?.error) {
       return toast({
-        title: "Something went wrong.",
+        title: signInResult?.error ?? "Something went wrong.",
         description: "Your sign in request failed. Please try again.",
         variant: "destructive",
       });
@@ -137,7 +138,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         {isGoogleLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
-          <Icons.logo className="mr-2 h-4 w-4" />
+          <Image
+            src="/google-icon.png"
+            width={16}
+            height={16}
+            alt="google icon"
+            className="mr-2"
+          />
         )}{" "}
         google
       </button>

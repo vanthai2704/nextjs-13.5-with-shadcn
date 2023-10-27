@@ -1,5 +1,4 @@
 "use client";
-import { LogOut } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,6 +12,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Header = () => {
   const { data } = useSession();
@@ -49,6 +49,10 @@ const Header = () => {
       <div>
         {data?.user && (
           <div className="flex flex-row items-center gap-5">
+            <Avatar>
+              <AvatarImage src={data?.user?.image ?? ""} />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
             <h6>{data?.user?.name}</h6>
             <Button variant={"destructive"} onClick={() => signOut()}>
               Logout

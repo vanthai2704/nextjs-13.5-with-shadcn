@@ -6,20 +6,10 @@ export default withAuth(
   async function middleware(req) {
     const token = await getToken({ req });
 
-    console.log("token", token);
-
     const isAuth = !!token;
     const isAuthPage =
       req.nextUrl.pathname.startsWith("/login") ||
       req.nextUrl.pathname.startsWith("/register");
-
-    const cookies = req.cookies;
-
-    console.log("cookies ====== ", cookies.get("__Host-next-auth.csrf-token"));
-
-    if (!cookies.get("__Host-next-auth.csrf-token")) {
-      return NextResponse.redirect(new URL("/error", req.url));
-    }
 
     if (isAuthPage) {
       if (isAuth) {
@@ -42,10 +32,7 @@ export default withAuth(
   },
   {
     callbacks: {
-      async authorized() {
-        // This is a work-around for handling redirect on auth pages.
-        // We return true here so that the middleware function above
-        // is always called.
+      authorized: ({ req, token }) => {
         return true;
       },
     },
