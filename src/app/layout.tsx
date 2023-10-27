@@ -1,7 +1,6 @@
 import Header from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
 import SessionProvider from "@/hocs/session-provider";
-import { authOptions } from "@/lib/auth";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Inter } from "next/font/google";
