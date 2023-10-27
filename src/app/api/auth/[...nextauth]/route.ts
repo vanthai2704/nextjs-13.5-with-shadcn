@@ -1,5 +1,4 @@
 import NextAuth, { NextAuthOptions, Session } from "next-auth";
-import { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -12,8 +11,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        console.log("credentials", credentials);
-
         if (credentials) {
           const res = await fetch("https://dummyjson.com/auth/login", {
             method: "POST",
@@ -24,8 +21,6 @@ export const authOptions: NextAuthOptions = {
               expiresInMins: 60,
             }),
           }).then((res) => res.json());
-
-          console.log("res", res);
 
           if (res?.message) {
             throw new Error("Username or password incorrectly");
